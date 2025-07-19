@@ -1,0 +1,15 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+canvas{
+    border: 1px solid black;
+}
+#canvas{
+    background-color: antiquewhite;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    
+}
