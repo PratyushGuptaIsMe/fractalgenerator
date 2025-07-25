@@ -1,7 +1,7 @@
 window.addEventListener("load", () => {
     class FractalObject{
         constructor(){
-            //sdd
+            //Commit
             this.length = length;
             this.sides = sides;
             this.branches = branches;
