@@ -49,6 +49,7 @@ window.addEventListener("load", () => {
     
 
     window.addEventListener("keydown", e => {
+        e.preventDefault();
         if(e.key === " "){
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawNewRandomFractal(canvas.width/2, canvas.height/2);
