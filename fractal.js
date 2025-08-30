@@ -45,7 +45,6 @@ window.addEventListener("load", () => {
     //start drawing from here
     //canvas origin is center of the page;
     drawNewRandomFractal(canvas.width/2, canvas.height/2);
-
     
 
     window.addEventListener("keydown", e => {
@@ -53,7 +52,6 @@ window.addEventListener("load", () => {
         if(e.key === " "){
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawNewRandomFractal(canvas.width/2, canvas.height/2);
-            
         }
     })
 
