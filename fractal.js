@@ -40,6 +40,7 @@ window.addEventListener("load", () => {
     let fractalColor = "brown";
     let lineWidth = 5;
     let maxCount = branches;
+    let shadowBblur = 10;
 
     // ==========================
     // CANVAS STYLING
@@ -48,9 +49,10 @@ window.addEventListener("load", () => {
     ctx.lineWidth = lineWidth;
     ctx.fillStyle = "black";
     ctx.strokeStyle = fractalColor;
-    ctx.shadowOffsetX = 6;
-    ctx.shadowOffsetY = 6;
+    ctx.shadowOffsetX = 4;
+    ctx.shadowOffsetY = 4;
     ctx.shadowColor = "black";
+    ctx.shadowBlur = shadowBblur;
 
     // Draw a tiny rectangle to test canvas
     ctx.fillRect(0, 0, 10, 10);
@@ -99,10 +101,10 @@ window.addEventListener("load", () => {
 
     function randomizeValues() {
         sides = Math.floor(Math.random() * 10 + 3);
-        branches = Math.floor(Math.random() * 15 + 2);
+        branches = Math.floor(Math.random() * 5 + 2);
         fractalColor = getRandomColor();
         spreadAngle = Math.random() * 3 + 0.1;
-        scale = Math.random() * 0.8 + 0.3;
+        scale = Math.random() * 0.6 + 0.3;
         angle = (Math.PI * 2) / sides;
         maxCount = branches;
 
