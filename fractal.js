@@ -96,7 +96,10 @@ window.addEventListener("load", () => {
     }
 
     function getRandomColor() {
-        return `rgb(${Math.random() * 255 + 1}, ${Math.random() * 255 + 1}, ${Math.random() * 255 + 1})`;
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
     }
 
     function randomizeValues() {
@@ -125,6 +128,140 @@ window.addEventListener("load", () => {
     // INITIAL DRAW
     // ==========================
     drawNewRandomFractal(canvas.width / 2, canvas.height / 2);
+    
+    // Initialize control panel values after initial draw
+    setTimeout(() => {
+        updateControlValues();
+    }, 100);
+
+    // ==========================
+    // REDRAW FUNCTION
+    // ==========================
+    function redrawFractal() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        drawFractal(canvas.width / 2, canvas.height / 2);
+        ctx.restore();
+    }
+
+    // ==========================
+    // CONTROL PANEL EVENT HANDLERS
+    // ==========================
+    function setupControlPanel() {
+        // Get control elements
+        const sidesSlider = document.getElementById('sides-slider');
+        const branchesSlider = document.getElementById('branches-slider');
+        const spreadAngleSlider = document.getElementById('spread-angle-slider');
+        const scaleSlider = document.getElementById('scale-slider');
+        const lineWidthSlider = document.getElementById('line-width-slider');
+        const colorPicker = document.getElementById('color-picker');
+        const randomizeBtn = document.getElementById('randomize-btn');
+        const hideBtn = document.getElementById('hide-btn');
+        const showBtn = document.getElementById('show-btn');
+
+        // Value display elements
+        const sidesValue = document.getElementById('sides-value');
+        const branchesValue = document.getElementById('branches-value');
+        const spreadAngleValue = document.getElementById('spread-angle-value');
+        const scaleValue = document.getElementById('scale-value');
+        const lineWidthValue = document.getElementById('line-width-value');
+
+        // Sides slider
+        sidesSlider.addEventListener('input', (e) => {
+            sides = parseInt(e.target.value);
+            angle = (Math.PI * 2) / sides;
+            sidesValue.textContent = sides;
+            redrawFractal();
+        });
+
+        // Branches slider
+        branchesSlider.addEventListener('input', (e) => {
+            branches = parseInt(e.target.value);
+            maxCount = branches;
+            branchesValue.textContent = branches;
+            redrawFractal();
+        });
+
+        // Spread angle slider
+        spreadAngleSlider.addEventListener('input', (e) => {
+            spreadAngle = parseFloat(e.target.value);
+            spreadAngleValue.textContent = spreadAngle.toFixed(2);
+            redrawFractal();
+        });
+
+        // Scale slider
+        scaleSlider.addEventListener('input', (e) => {
+            scale = parseFloat(e.target.value);
+            scaleValue.textContent = scale.toFixed(2);
+            redrawFractal();
+        });
+
+        // Line width slider
+        lineWidthSlider.addEventListener('input', (e) => {
+            lineWidth = parseInt(e.target.value);
+            ctx.lineWidth = lineWidth;
+            lineWidthValue.textContent = lineWidth;
+            redrawFractal();
+        });
+
+        // Color picker
+        colorPicker.addEventListener('input', (e) => {
+            fractalColor = e.target.value;
+            ctx.strokeStyle = fractalColor;
+            redrawFractal();
+        });
+
+        // Randomize button
+        randomizeBtn.addEventListener('click', () => {
+            randomizeValues();
+            updateControlValues();
+            redrawFractal();
+        });
+
+        // Hide button
+        hideBtn.addEventListener('click', () => {
+            const controlPanel = document.getElementById('control-panel');
+            controlPanel.classList.add('hidden');
+            
+            // Show the show button after panel animation starts
+            setTimeout(() => {
+                showBtn.style.display = 'block';
+                // Trigger reflow to ensure the element is rendered before animation
+                showBtn.offsetHeight;
+                showBtn.classList.remove('hidden');
+            }, 100);
+        });
+
+        // Show button
+        showBtn.addEventListener('click', () => {
+            const controlPanel = document.getElementById('control-panel');
+            
+            // Hide show button first
+            showBtn.classList.add('hidden');
+            
+            // Show control panel after show button animation starts
+            setTimeout(() => {
+                controlPanel.classList.remove('hidden');
+                showBtn.style.display = 'none';
+            }, 100);
+        });
+    }
+
+    // Update control values to match current fractal parameters
+    function updateControlValues() {
+        document.getElementById('sides-slider').value = sides;
+        document.getElementById('branches-slider').value = branches;
+        document.getElementById('spread-angle-slider').value = spreadAngle;
+        document.getElementById('scale-slider').value = scale;
+        document.getElementById('line-width-slider').value = lineWidth;
+        document.getElementById('color-picker').value = fractalColor;
+
+        document.getElementById('sides-value').textContent = sides;
+        document.getElementById('branches-value').textContent = branches;
+        document.getElementById('spread-angle-value').textContent = spreadAngle.toFixed(2);
+        document.getElementById('scale-value').textContent = scale.toFixed(2);
+        document.getElementById('line-width-value').textContent = lineWidth;
+    }
 
     // ==========================
     // INTERACTIONS
@@ -134,6 +271,11 @@ window.addEventListener("load", () => {
         if (e.key === " ") {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawNewRandomFractal(canvas.width / 2, canvas.height / 2);
+            // Update slider values to match the new random fractal
+            updateControlValues();
         }
     });
+
+    // Initialize control panel
+    setupControlPanel();
 });

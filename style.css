@@ -4,13 +4,206 @@
     box-sizing: border-box;
     overflow: hidden;
 }
+
 canvas{
     border: 1px solid black;
 }
+
 #canvas{
     background-color: black;
     background-image: radial-gradient(rgb(43, 39, 39), black);
     position: absolute;
     left: 0px;
     top: 0px;
+}
+
+/* Control Panel Styles */
+#control-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+    color: white;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    min-width: 200px;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translateX(0) scale(1);
+    opacity: 1;
+}
+
+#control-panel.hidden {
+    transform: translateX(100%) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#control-panel h3 {
+    margin-bottom: 12px;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.control-group {
+    margin-bottom: 10px;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #e0e0e0;
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #333;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb:hover {
+    background: #66BB6A;
+    transform: scale(1.1);
+}
+
+.control-group input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.control-group input[type="color"] {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #666;
+    padding: 0;
+    overflow: hidden;
+}
+
+.control-group input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.control-group input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.control-group input[type="color"]::-moz-color-swatch {
+    border: none;
+    border-radius: 20px;
+}
+
+.control-group button {
+    width: 48%;
+    padding: 6px;
+    margin: 1px;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 11px;
+}
+
+.control-group button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.control-group button:active {
+    transform: translateY(0);
+}
+
+.color-picker {
+    margin-top: 6px;
+}
+#clear-btn {
+    background: linear-gradient(45deg, #f44336, #d32f2f);
+}
+
+#clear-btn:hover {
+    background: linear-gradient(45deg, #e57373, #f44336);
+}
+
+/* Value display styling */
+.control-group span {
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+/* Show button styling */
+#show-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #2196F3, #1976D2);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    transform: translateX(0) scale(1);
+    opacity: 1;
+}
+
+#show-btn.hidden {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#show-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(45deg, #42A5F5, #2196F3);
+}
+
+#show-btn:active {
+    transform: translateY(0);
 }

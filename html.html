@@ -4,10 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fractals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <canvas id="canvas"></canvas>
+    
+    <!-- Control Panel -->
+    <div id="control-panel">
+        <h3>Fractal Controls</h3>
+        
+        <div class="control-group">
+            <label for="sides-slider">Sides: <span id="sides-value">10</span></label>
+            <input type="range" id="sides-slider" min="3" max="20" value="10" step="1">
+        </div>
+        
+        <div class="control-group">
+            <label for="branches-slider">Branches: <span id="branches-value">5</span></label>
+            <input type="range" id="branches-slider" min="1" max="10" value="5" step="1">
+        </div>
+        
+        <div class="control-group">
+            <label for="spread-angle-slider">Spread Angle: <span id="spread-angle-value">0.50</span></label>
+            <input type="range" id="spread-angle-slider" min="0.1" max="3" value="0.5" step="0.01">
+        </div>
+        
+        <div class="control-group">
+            <label for="scale-slider">Scale: <span id="scale-value">1.00</span></label>
+            <input type="range" id="scale-slider" min="0.1" max="1" value="1" step="0.01">
+        </div>
+        
+        <div class="control-group">
+            <label for="line-width-slider">Line Width: <span id="line-width-value">5</span></label>
+            <input type="range" id="line-width-slider" min="1" max="20" value="5" step="1">
+        </div>
+        
+        <div class="control-group">
+            <label for="color-picker">Color:</label>
+            <input type="color" id="color-picker" class="color-picker" value="#8B4513">
+        </div>
+        
+        <div class="control-group">
+            <button id="randomize-btn">Randomize</button>
+            <button id="hide-btn">Hide Panel</button>
+        </div>
+    </div>
+    
+    <!-- Show Panel Button (hidden by default) -->
+    <button id="show-btn" style="display: none;">Show Controls</button>
+    
     <script src="fractal.js"></script>
 </body>
 </html>
