@@ -125,6 +125,144 @@ window.addEventListener("load", () => {
     }
 
     // ==========================
+    // EXPORT/IMPORT FUNCTIONS
+    // ==========================
+    function exportFractal() {
+        const fractalData = {
+            sides: sides,
+            branches: branches,
+            spreadAngle: spreadAngle,
+            scale: scale,
+            lineWidth: lineWidth,
+            fractalColor: fractalColor,
+            version: "1.0"
+        };
+        
+        const exportString = JSON.stringify(fractalData, null, 2);
+        
+        // Copy to clipboard
+        navigator.clipboard.writeText(exportString).then(() => {
+            // Show temporary success message
+            const exportBtn = document.getElementById('export-btn');
+            const originalText = exportBtn.textContent;
+            exportBtn.textContent = 'Copied!';
+            exportBtn.style.background = 'linear-gradient(45deg, #4CAF50, #45a049)';
+            
+            setTimeout(() => {
+                exportBtn.textContent = originalText;
+                exportBtn.style.background = 'linear-gradient(45deg, #FF9800, #F57C00)';
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy to clipboard:', err);
+            // Fallback: show alert with the string
+            alert('Fractal data copied to console. Check developer tools.\n\n' + exportString);
+            console.log('Fractal Export Data:', exportString);
+        });
+    }
+
+    function importFractal() {
+        const importArea = document.getElementById('import-area');
+        const importText = document.getElementById('import-text');
+        
+        // Show the import area
+        importArea.style.display = 'block';
+        
+        // Clear the textarea and focus it
+        importText.value = '';
+        importText.focus();
+    }
+
+    function applyImport() {
+        const importText = document.getElementById('import-text');
+        const importString = importText.value.trim();
+        
+        if (!importString) {
+            alert('Please enter fractal data to import.');
+            return;
+        }
+        
+        try {
+            const fractalData = JSON.parse(importString);
+            
+            // Validate the data structure
+            if (!fractalData.sides || !fractalData.branches || !fractalData.spreadAngle || 
+                !fractalData.scale || !fractalData.lineWidth || !fractalData.fractalColor) {
+                throw new Error('Invalid fractal data format');
+            }
+            
+            // Apply the imported settings
+            sides = parseInt(fractalData.sides);
+            branches = parseInt(fractalData.branches);
+            spreadAngle = parseFloat(fractalData.spreadAngle);
+            scale = parseFloat(fractalData.scale);
+            lineWidth = parseInt(fractalData.lineWidth);
+            fractalColor = fractalData.fractalColor;
+            
+            // Update derived values
+            angle = (Math.PI * 2) / sides;
+            maxCount = branches;
+            
+            // Update canvas context
+            ctx.lineWidth = lineWidth;
+            ctx.strokeStyle = fractalColor;
+            
+            // Update control panel values
+            updateControlValues();
+            
+            // Redraw the fractal
+            redrawFractal();
+            
+            // Hide the import area
+            document.getElementById('import-area').style.display = 'none';
+            
+            // Show success message on import button
+            const importBtn = document.getElementById('import-btn');
+            const originalText = importBtn.textContent;
+            importBtn.textContent = 'Imported!';
+            importBtn.style.background = 'linear-gradient(45deg, #4CAF50, #45a049)';
+            
+            setTimeout(() => {
+                importBtn.textContent = originalText;
+                importBtn.style.background = 'linear-gradient(45deg, #9C27B0, #7B1FA2)';
+            }, 2000);
+            
+        } catch (error) {
+            console.error('Import failed:', error);
+            alert('Failed to import fractal data. Please check the format and try again.\n\nError: ' + error.message);
+        }
+    }
+
+    function copyImportText() {
+        const importText = document.getElementById('import-text');
+        const textToCopy = importText.value;
+        
+        if (!textToCopy.trim()) {
+            alert('No text to copy.');
+            return;
+        }
+        
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            // Show temporary success message
+            const copyBtn = document.getElementById('copy-import-btn');
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            copyBtn.style.background = 'linear-gradient(45deg, #4CAF50, #45a049)';
+            
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.background = 'linear-gradient(45deg, #2196F3, #1976D2)';
+            }, 1500);
+        }).catch(err => {
+            console.error('Failed to copy to clipboard:', err);
+            alert('Failed to copy to clipboard. Please copy manually.');
+        });
+    }
+
+    function closeImportArea() {
+        document.getElementById('import-area').style.display = 'none';
+    }
+
+    // ==========================
     // INITIAL DRAW
     // ==========================
     drawNewRandomFractal(canvas.width / 2, canvas.height / 2);
@@ -158,6 +296,8 @@ window.addEventListener("load", () => {
         const randomizeBtn = document.getElementById('randomize-btn');
         const hideBtn = document.getElementById('hide-btn');
         const showBtn = document.getElementById('show-btn');
+        const exportBtn = document.getElementById('export-btn');
+        const importBtn = document.getElementById('import-btn');
 
         // Value display elements
         const sidesValue = document.getElementById('sides-value');
@@ -244,6 +384,16 @@ window.addEventListener("load", () => {
                 controlPanel.classList.remove('hidden');
                 showBtn.style.display = 'none';
             }, 100);
+        });
+
+        // Export button
+        exportBtn.addEventListener('click', () => {
+            exportFractal();
+        });
+
+        // Import button
+        importBtn.addEventListener('click', () => {
+            importFractal();
         });
     }
 

@@ -88,7 +88,6 @@ canvas{
 
 .control-group input[type="range"]::-webkit-slider-thumb:hover {
     background: #66BB6A;
-    transform: scale(1.1);
 }
 
 .control-group input[type="range"]::-moz-range-thumb {
@@ -146,7 +145,6 @@ canvas{
 }
 
 .control-group button:hover {
-    transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -199,11 +197,101 @@ canvas{
 }
 
 #show-btn:hover {
-    transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     background: linear-gradient(45deg, #42A5F5, #2196F3);
 }
 
 #show-btn:active {
     transform: translateY(0);
+}
+
+/* Import/Export button styling */
+#export-btn {
+    background: linear-gradient(45deg, #FF9800, #F57C00);
+}
+
+#export-btn:hover {
+    background: linear-gradient(45deg, #FFB74D, #FF9800);
+}
+
+#import-btn {
+    background: linear-gradient(45deg, #9C27B0, #7B1FA2);
+}
+
+#import-btn:hover {
+    background: linear-gradient(45deg, #BA68C8, #9C27B0);
+}
+
+/* Import area styling */
+.import-area {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.import-area label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #e0e0e0;
+}
+
+#import-text {
+    width: 100%;
+    height: 80px;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+    resize: vertical;
+    margin-bottom: 8px;
+}
+
+#import-text::placeholder {
+    color: #888;
+}
+
+#import-text:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.import-buttons {
+    display: flex;
+    gap: 4px;
+}
+
+.import-buttons button {
+    flex: 1;
+    padding: 6px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 10px;
+    transition: all 0.2s ease;
+}
+
+#copy-import-btn {
+    background: linear-gradient(45deg, #2196F3, #1976D2);
+}
+
+#apply-import-btn {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+#close-import-btn {
+    background: linear-gradient(45deg, #f44336, #d32f2f);
+}
+
+.import-buttons button:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }

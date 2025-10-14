@@ -50,6 +50,22 @@
             <button id="randomize-btn">Randomize</button>
             <button id="hide-btn">Hide Panel</button>
         </div>
+        
+        <div class="control-group">
+            <button id="export-btn">Export Fractal</button>
+            <button id="import-btn">Import Fractal</button>
+        </div>
+        
+        <!-- Import text area (hidden by default) -->
+        <div id="import-area" class="import-area" style="display: none;">
+            <label for="import-text">Import Data:</label>
+            <textarea id="import-text" placeholder="Paste fractal data here..."></textarea>
+            <div class="import-buttons">
+                <button id="copy-import-btn">Copy</button>
+                <button id="apply-import-btn">Apply</button>
+                <button id="close-import-btn">Close</button>
+            </div>
+        </div>
     </div>
     
     <!-- Show Panel Button (hidden by default) -->
