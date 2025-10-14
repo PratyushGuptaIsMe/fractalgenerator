@@ -258,7 +258,10 @@ window.addEventListener("load", () => {
             importContent.style.display = 'block';
             importText.value = '';
             // Focus the textarea after a short delay to ensure it's visible
-            setTimeout(() => importText.focus(), 100);
+            setTimeout(() => {
+                importText.focus();
+                importText.select();
+            }, 150);
         }
         
         // Show overlay
@@ -464,6 +467,23 @@ window.addEventListener("load", () => {
             if (e.key === 'Enter' && e.ctrlKey) {
                 applyImport();
             }
+        });
+
+        // Ensure paste works properly
+        document.getElementById('import-text').addEventListener('paste', (e) => {
+            // Allow the default paste behavior
+            setTimeout(() => {
+                const importText = document.getElementById('import-text');
+                if (importText.value.trim()) {
+                    // Optional: Show a brief indication that content was pasted
+                    console.log('Content pasted successfully');
+                }
+            }, 10);
+        });
+
+        // Ensure textarea gets focus when clicked
+        document.getElementById('import-text').addEventListener('click', (e) => {
+            e.target.focus();
         });
     }
 
