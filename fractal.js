@@ -140,36 +140,13 @@ window.addEventListener("load", () => {
         
         const exportString = JSON.stringify(fractalData, null, 2);
         
-        // Copy to clipboard
-        navigator.clipboard.writeText(exportString).then(() => {
-            // Show temporary success message
-            const exportBtn = document.getElementById('export-btn');
-            const originalText = exportBtn.textContent;
-            exportBtn.textContent = 'Copied!';
-            exportBtn.style.background = 'linear-gradient(45deg, #4CAF50, #45a049)';
-            
-            setTimeout(() => {
-                exportBtn.textContent = originalText;
-                exportBtn.style.background = 'linear-gradient(45deg, #FF9800, #F57C00)';
-            }, 2000);
-        }).catch(err => {
-            console.error('Failed to copy to clipboard:', err);
-            // Fallback: show alert with the string
-            alert('Fractal data copied to console. Check developer tools.\n\n' + exportString);
-            console.log('Fractal Export Data:', exportString);
-        });
+        // Show mini window with export data
+        showMiniWindow('Export Fractal', 'export', exportString);
     }
 
     function importFractal() {
-        const importArea = document.getElementById('import-area');
-        const importText = document.getElementById('import-text');
-        
-        // Show the import area
-        importArea.style.display = 'block';
-        
-        // Clear the textarea and focus it
-        importText.value = '';
-        importText.focus();
+        // Show mini window for import
+        showMiniWindow('Import Fractal', 'import', '');
     }
 
     function applyImport() {
@@ -212,8 +189,8 @@ window.addEventListener("load", () => {
             // Redraw the fractal
             redrawFractal();
             
-            // Hide the import area
-            document.getElementById('import-area').style.display = 'none';
+            // Hide the mini window
+            hideMiniWindow();
             
             // Show success message on import button
             const importBtn = document.getElementById('import-btn');
@@ -258,8 +235,66 @@ window.addEventListener("load", () => {
         });
     }
 
-    function closeImportArea() {
-        document.getElementById('import-area').style.display = 'none';
+    function showMiniWindow(title, type, data) {
+        const overlay = document.getElementById('mini-window-overlay');
+        const titleElement = document.getElementById('mini-window-title');
+        const exportContent = document.getElementById('export-content');
+        const importContent = document.getElementById('import-content');
+        const exportText = document.getElementById('export-text');
+        const importText = document.getElementById('import-text');
+        
+        // Set title
+        titleElement.textContent = title;
+        
+        // Hide both content areas first
+        exportContent.style.display = 'none';
+        importContent.style.display = 'none';
+        
+        if (type === 'export') {
+            exportContent.style.display = 'block';
+            exportText.value = data;
+            exportText.select(); // Select all text for easy copying
+        } else if (type === 'import') {
+            importContent.style.display = 'block';
+            importText.value = '';
+            // Focus the textarea after a short delay to ensure it's visible
+            setTimeout(() => importText.focus(), 100);
+        }
+        
+        // Show overlay
+        overlay.style.display = 'flex';
+        overlay.classList.remove('hidden');
+    }
+
+    function hideMiniWindow() {
+        const overlay = document.getElementById('mini-window-overlay');
+        overlay.classList.add('hidden');
+        
+        // Hide overlay after animation
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 300);
+    }
+
+    function copyExportText() {
+        const exportText = document.getElementById('export-text');
+        const textToCopy = exportText.value;
+        
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            // Show temporary success message
+            const copyBtn = document.getElementById('copy-export-btn');
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            copyBtn.style.background = 'linear-gradient(45deg, #4CAF50, #45a049)';
+            
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.background = 'linear-gradient(45deg, #2196F3, #1976D2)';
+            }, 1500);
+        }).catch(err => {
+            console.error('Failed to copy to clipboard:', err);
+            alert('Failed to copy to clipboard. Please copy manually.');
+        });
     }
 
     // ==========================
@@ -298,9 +333,10 @@ window.addEventListener("load", () => {
         const showBtn = document.getElementById('show-btn');
         const exportBtn = document.getElementById('export-btn');
         const importBtn = document.getElementById('import-btn');
+        const copyExportBtn = document.getElementById('copy-export-btn');
         const copyImportBtn = document.getElementById('copy-import-btn');
         const applyImportBtn = document.getElementById('apply-import-btn');
-        const closeImportBtn = document.getElementById('close-import-btn');
+        const closeMiniWindowBtn = document.getElementById('close-mini-window');
 
         // Value display elements
         const sidesValue = document.getElementById('sides-value');
@@ -399,7 +435,11 @@ window.addEventListener("load", () => {
             importFractal();
         });
 
-        // Import area buttons
+        // Mini window buttons
+        copyExportBtn.addEventListener('click', () => {
+            copyExportText();
+        });
+
         copyImportBtn.addEventListener('click', () => {
             copyImportText();
         });
@@ -408,8 +448,15 @@ window.addEventListener("load", () => {
             applyImport();
         });
 
-        closeImportBtn.addEventListener('click', () => {
-            closeImportArea();
+        closeMiniWindowBtn.addEventListener('click', () => {
+            hideMiniWindow();
+        });
+
+        // Close mini window when clicking overlay
+        document.getElementById('mini-window-overlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                hideMiniWindow();
+            }
         });
 
         // Allow Enter key to apply import

@@ -1,4 +1,4 @@
-# fractalgenerator
-Modified version of https://www.youtube.com/@Frankslaboratory 's JS fractal generator. 100% vanilla javascript, html, css.
+# Fractal generator
+Modified version of [@Frankslaboratory](https://www.youtube.com/@Frankslaboratory)'s JS fractal generator. Made using vanilla javascript, html and css.
 
-Orginal video - https://www.youtube.com/watch?v=dQKYao-daY
+Orginal video - [Learn Creative Coding: Fractals](https://www.youtube.com/watch?v=dQKYao-daYw)

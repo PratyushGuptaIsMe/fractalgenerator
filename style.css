@@ -20,18 +20,18 @@ canvas{
 /* Control Panel Styles */
 #control-panel {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    padding: 12px;
+    border-radius: 10px;
+    padding: 8px;
     color: white;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-    min-width: 200px;
+    min-width: 180px;
     z-index: 1000;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform: translateX(0) scale(1);
     opacity: 1;
@@ -44,22 +44,22 @@ canvas{
 }
 
 #control-panel h3 {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     text-align: center;
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .control-group {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .control-group label {
     display: block;
-    margin-bottom: 3px;
-    font-size: 12px;
+    margin-bottom: 2px;
+    font-size: 11px;
     font-weight: 500;
     color: #e0e0e0;
 }
@@ -102,9 +102,9 @@ canvas{
 
 .control-group input[type="color"] {
     width: 100%;
-    height: 40px;
+    height: 32px;
     border: none;
-    border-radius: 20px;
+    border-radius: 16px;
     cursor: pointer;
     background: #666;
     padding: 0;
@@ -131,17 +131,17 @@ canvas{
 
 .control-group button {
     width: 48%;
-    padding: 6px;
+    padding: 4px;
     margin: 1px;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     background: linear-gradient(45deg, #4CAF50, #45a049);
     color: white;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .control-group button:hover {
@@ -153,7 +153,7 @@ canvas{
 }
 
 .color-picker {
-    margin-top: 6px;
+    margin-top: 4px;
 }
 #clear-btn {
     background: linear-gradient(45deg, #f44336, #d32f2f);
@@ -294,4 +294,139 @@ canvas{
 
 .import-buttons button:hover {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Mini Window Overlay */
+.mini-window-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.mini-window-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mini-window {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    min-width: 400px;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow: hidden;
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.mini-window-overlay.hidden .mini-window {
+    transform: scale(0.9);
+}
+
+.mini-window-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.mini-window-header h4 {
+    margin: 0;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.mini-window-content {
+    padding: 16px;
+}
+
+.mini-window-content textarea {
+    width: 100%;
+    height: 200px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    resize: vertical;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+.mini-window-content textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+}
+
+.mini-window-content textarea::placeholder {
+    color: #888;
+}
+
+.copy-btn, .apply-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    background: linear-gradient(45deg, #2196F3, #1976D2);
+}
+
+.apply-btn {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+.copy-btn:hover, .apply-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.import-buttons {
+    display: flex;
+    gap: 8px;
 }

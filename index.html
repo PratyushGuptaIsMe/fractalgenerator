@@ -55,21 +55,33 @@
             <button id="export-btn">Export Fractal</button>
             <button id="import-btn">Import Fractal</button>
         </div>
-        
-        <!-- Import text area (hidden by default) -->
-        <div id="import-area" class="import-area" style="display: none;">
-            <label for="import-text">Import Data:</label>
-            <textarea id="import-text" placeholder="Paste fractal data here..."></textarea>
-            <div class="import-buttons">
-                <button id="copy-import-btn">Copy</button>
-                <button id="apply-import-btn">Apply</button>
-                <button id="close-import-btn">Close</button>
-            </div>
-        </div>
     </div>
     
     <!-- Show Panel Button (hidden by default) -->
     <button id="show-btn" style="display: none;">Show Controls</button>
+    
+    <!-- Mini Window Overlay -->
+    <div id="mini-window-overlay" class="mini-window-overlay" style="display: none;">
+        <div id="mini-window" class="mini-window">
+            <div class="mini-window-header">
+                <h4 id="mini-window-title">Export Fractal</h4>
+                <button id="close-mini-window" class="close-btn">&times;</button>
+            </div>
+            <div class="mini-window-content">
+                <div id="export-content" style="display: none;">
+                    <textarea id="export-text" readonly></textarea>
+                    <button id="copy-export-btn" class="copy-btn">Copy to Clipboard</button>
+                </div>
+                <div id="import-content" style="display: none;">
+                    <textarea id="import-text" placeholder="Paste fractal data here..."></textarea>
+                    <div class="import-buttons">
+                        <button id="copy-import-btn" class="copy-btn">Copy</button>
+                        <button id="apply-import-btn" class="apply-btn">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script src="fractal.js"></script>
 </body>
