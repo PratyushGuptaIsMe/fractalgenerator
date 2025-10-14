@@ -298,6 +298,9 @@ window.addEventListener("load", () => {
         const showBtn = document.getElementById('show-btn');
         const exportBtn = document.getElementById('export-btn');
         const importBtn = document.getElementById('import-btn');
+        const copyImportBtn = document.getElementById('copy-import-btn');
+        const applyImportBtn = document.getElementById('apply-import-btn');
+        const closeImportBtn = document.getElementById('close-import-btn');
 
         // Value display elements
         const sidesValue = document.getElementById('sides-value');
@@ -394,6 +397,26 @@ window.addEventListener("load", () => {
         // Import button
         importBtn.addEventListener('click', () => {
             importFractal();
+        });
+
+        // Import area buttons
+        copyImportBtn.addEventListener('click', () => {
+            copyImportText();
+        });
+
+        applyImportBtn.addEventListener('click', () => {
+            applyImport();
+        });
+
+        closeImportBtn.addEventListener('click', () => {
+            closeImportArea();
+        });
+
+        // Allow Enter key to apply import
+        document.getElementById('import-text').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                applyImport();
+            }
         });
     }
 
