@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap');
+
 *{
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
 
-/* Allow scrolling inside the page if content overflows (canvas handles its own size) */
 html, body {
     height: 100%;
     overflow: hidden;
@@ -23,7 +23,6 @@ canvas{
     top: 0px;
 }
 
-/* Control Panel Styles */
 #control-panel {
     position: fixed;
     top: 15px;
@@ -42,8 +41,6 @@ canvas{
     transition: all 0.32s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform: translateX(0) scale(1);
     opacity: 1;
-
-    /* Make the panel a vertical flex container so we can push bottom actions down */
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -72,13 +69,11 @@ canvas{
     margin-bottom: 4px;
 }
 
-/* Make export group visually separated */
 .export-group {
     display: flex;
     gap: 6px;
 }
 
-/* Bottom actions should stay at the bottom of the panel */
 .bottom-actions {
     margin-top: auto;
     display: flex;
@@ -194,14 +189,12 @@ canvas{
     background: linear-gradient(45deg, #e57373, #f44336);
 }
 
-/* Value display styling */
 .control-group span {
     color: #4CAF50;
     font-weight: bold;
     font-size: 12px;
 }
 
-/* Show button styling */
 #show-btn {
     position: fixed;
     top: 20px;
@@ -236,7 +229,6 @@ canvas{
     transform: translateY(0);
 }
 
-/* Import/Export button styling */
 #export-btn {
     background: linear-gradient(45deg, #FF9800, #F57C00);
 }
@@ -253,7 +245,6 @@ canvas{
     background: linear-gradient(45deg, #BA68C8, #9C27B0);
 }
 
-/* Import area styling */
 .import-area {
     margin-top: 10px;
     padding: 10px;
@@ -327,7 +318,6 @@ canvas{
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Mini Window Overlay */
 .mini-window-overlay {
     position: fixed;
     top: 0;
