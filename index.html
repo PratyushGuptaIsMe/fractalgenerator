@@ -42,15 +42,17 @@
             <label for="color-picker">Color:</label>
             <input type="color" id="color-picker" class="color-picker" value="#8B4513">
         </div>
-        
-        <div class="control-group">
-            <button id="randomize-btn">Randomize</button>
-            <button id="hide-btn">Hide Panel</button>
-        </div>
-        
-        <div class="control-group">
+
+        <!-- Export/Import placed directly under color -->
+        <div class="control-group export-group">
             <button id="export-btn">Export Fractal</button>
             <button id="import-btn">Import Fractal</button>
+        </div>
+
+        <!-- Bottom actions: anchored to the bottom of the panel -->
+        <div class="control-group bottom-actions">
+            <button id="randomize-btn">Randomize</button>
+            <button id="hide-btn">Hide Panel</button>
         </div>
     </div>
     

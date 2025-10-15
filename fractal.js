@@ -135,7 +135,6 @@ window.addEventListener("load", () => {
             scale: scale,
             lineWidth: lineWidth,
             fractalColor: fractalColor,
-            version: "1.0"
         };
         
         const exportString = JSON.stringify(fractalData, null, 2);
@@ -507,8 +506,30 @@ window.addEventListener("load", () => {
     // INTERACTIONS
     // ==========================
     window.addEventListener("keydown", e => {
-        e.preventDefault();
-        if (e.key === " ") {
+        // Don't block typing in input/textarea or any contentEditable element.
+        const active = document.activeElement;
+        const isEditable = active && (
+            active.tagName === 'INPUT' ||
+            active.tagName === 'TEXTAREA' ||
+            active.isContentEditable
+        );
+
+        // If focus is inside an editable element, allow the event to proceed normally.
+        if (isEditable) {
+            // Support Ctrl+Enter in the import textarea to apply import
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                const importText = document.getElementById('import-text');
+                if (document.activeElement === importText) {
+                    e.preventDefault();
+                    applyImport();
+                }
+            }
+            return;
+        }
+
+        // Only intercept Space when not focused on an input so it doesn't cause page scroll
+        if (e.code === 'Space' || e.key === ' ') {
+            e.preventDefault();
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawNewRandomFractal(canvas.width / 2, canvas.height / 2);
             // Update slider values to match the new random fractal
