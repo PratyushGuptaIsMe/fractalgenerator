@@ -189,19 +189,7 @@ window.addEventListener("load", () => {
             redrawFractal();
             
             // Hide the mini window
-            hideMiniWindow();
-            
-            // Show success message on import button
-            const importBtn = document.getElementById('import-btn');
-            const originalText = importBtn.textContent;
-            importBtn.textContent = 'Imported!';
-            importBtn.style.background = 'linear-gradient(45deg, #4CAF50, #45a049)';
-            
-            setTimeout(() => {
-                importBtn.textContent = originalText;
-                importBtn.style.background = 'linear-gradient(45deg, #9C27B0, #7B1FA2)';
-            }, 2000);
-            
+            hideMiniWindow();    
         } catch (error) {
             console.error('Import failed:', error);
             alert('Failed to import fractal data. Please check the format and try again.\n\nError: ' + error.message);
