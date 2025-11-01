@@ -173,7 +173,7 @@ window.addEventListener("load", () => {
             setTimeout(() => {
                 importBtn.textContent = originalText;
                 importBtn.style.background = 'linear-gradient(45deg, #9C27B0, #7B1FA2)';
-            }, 2000);
+            }, 1000);
 
         } catch (error) {
             console.error('Import failed:', error);
@@ -192,7 +192,7 @@ window.addEventListener("load", () => {
             setTimeout(() => {
                 copyBtn.textContent = original;
                 copyBtn.style.background = 'linear-gradient(45deg, #2196F3, #1976D2)';
-            }, 1500);
+            }, 1000);
         });
     }
 
@@ -206,7 +206,7 @@ window.addEventListener("load", () => {
             setTimeout(() => {
                 copyBtn.textContent = original;
                 copyBtn.style.background = 'linear-gradient(45deg, #2196F3, #1976D2)';
-            }, 1500);
+            }, 1000);
         });
     }
 
@@ -225,7 +225,10 @@ window.addEventListener("load", () => {
         if (type === 'export') {
             exportContent.style.display = 'block';
             exportText.value = data;
-            exportText.select();
+            setTimeout(() => {
+                exportText.focus();
+                exportText.select();
+            }, 150);
         } else if (type === 'import') {
             importContent.style.display = 'block';
             importText.value = '';
@@ -359,7 +362,10 @@ window.addEventListener("load", () => {
         });
 
         document.getElementById('import-text').addEventListener('keydown', e => {
-            if (e.key === 'Enter' && e.ctrlKey) applyImport();
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                applyImport();
+            }
         });
 
         document.getElementById('import-text').addEventListener('click', e => e.target.focus());
