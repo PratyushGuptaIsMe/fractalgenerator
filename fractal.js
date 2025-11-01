@@ -507,11 +507,11 @@ window.addEventListener("load", () => {
     // INTERACTIONS
     // ==========================
     window.addEventListener("keydown", e => {
-        e.preventDefault();
-        if (e.key === " ") {
+        // Only prevent spacebar scrolling if not in an input or textarea
+        if (e.key === " " && e.target.tagName !== "INPUT" && e.target.tagName !== "TEXTAREA") {
+            e.preventDefault();
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawNewRandomFractal(canvas.width / 2, canvas.height / 2);
-            // Update slider values to match the new random fractal
             updateControlValues();
         }
     });
