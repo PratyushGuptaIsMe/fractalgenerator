@@ -1,2 +1,3 @@
 # Fractal generator
-Made using vanilla javascript, html and css.
+Modified version of [@Frankslaboratory](https://www.youtube.com/@Frankslaboratory)'s JS fractal generator. Made using vanilla javascript, html and css.
+
